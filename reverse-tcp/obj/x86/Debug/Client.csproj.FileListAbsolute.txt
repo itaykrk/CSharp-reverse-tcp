@@ -1,0 +1,6 @@
+c:\users\itayk\documents\visual studio 2010\Projects\Client\Client\bin\Debug\Client.exe
+c:\users\itayk\documents\visual studio 2010\Projects\Client\Client\bin\Debug\Client.pdb
+c:\users\itayk\documents\visual studio 2010\Projects\Client\Client\obj\x86\Debug\Client.exe
+c:\users\itayk\documents\visual studio 2010\Projects\Client\Client\obj\x86\Debug\Client.pdb
+C:\Users\Itayk\Documents\Visual Studio 2010\Projects\Client\Client\bin\Debug\Client.exe.config
+C:\Users\Itayk\Documents\Visual Studio 2010\Projects\Client\Client\obj\x86\Debug\Client.csprojResolveAssemblyReference.cache
